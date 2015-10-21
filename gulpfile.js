@@ -7,6 +7,7 @@
 
 var gulp = require('gulp');
 var code = require('gulp-code');
+var less = require('gulp-less');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
 var del = require('del');

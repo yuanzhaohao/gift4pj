@@ -1,14 +1,17 @@
 (function ($, win, doc) {
 
 $(function () {
-  var rAF = win.requestAnimationFrame || win.webkitRequestAnimationFrame || function (cb) { win.setTimeout(cb, 16); };
+  var rAF = win.requestAnimationFrame || win.webkitRequestAnimationFrame || function (cb) { win.setTimeout(cb, 16); },
+    $gift = $('#J_gift'),
+    offsetX = $gift.width() / 2,
+    offsetY = $gift.height() / 2 - 55;
+
   var getHeartPoint = function (angle) {
   	var t = angle / Math.PI,
-      x = 19.5 * (16 * Math.pow(Math.sin(t), 3))，
+      x = 19.5 * (16 * Math.pow(Math.sin(t), 3)),
       y = - 20 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
   	return [offsetX + x, offsetY + y];
   };
-
   var startHeartAnimation = function () {
   	var interval = 50,
       angle = 10,
@@ -35,7 +38,9 @@ $(function () {
   			angle += 0.2;
   		}
   	}, interval);
-  }
+  };
+
+  startHeartAnimation();
 });
 
 })(Zepto, window, document, undefined);

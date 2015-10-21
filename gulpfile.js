@@ -47,5 +47,8 @@ gulp.task('open', function () {
   return gulp.src('./index.html').pipe(open('', { url: 'http://localhost:3000/'}));
 });
 
-gulp.task('default', ['js']);
-gulp.task('server', ['connect', 'open']);
+gulp.task('default', ['clean', 'js', 'less', 'css']);
+gulp.task('watch', function () {
+  gulp.watch(['src/**/*.less'], ['less']);
+});
+gulp.task('server', ['connect', 'open', 'watch']);

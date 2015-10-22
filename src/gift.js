@@ -4,7 +4,7 @@ $(function () {
   var rAF = win.requestAnimationFrame || win.webkitRequestAnimationFrame || function (cb) { win.setTimeout(cb, 16); },
     $gift = $('#J_gift'),
     offsetX = $gift.width() / 2,
-    offsetY = $gift.height() / 2 - 55,
+    offsetY = $gift.height() / 2 - 25,
     $canvas = $('#J_canvas'),
     canvas = $canvas[0],
     ctx;

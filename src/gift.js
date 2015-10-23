@@ -302,11 +302,12 @@ $(function () {
       $count[0].addEventListener(EVENT, function (e) {
         e.currentTarget.removeEventListener(EVENT, arguments.callee);
         $text.addClass(cls1);
-      }, false);
-      $text[0].addEventListener(EVENT, function (e) {
-        e.currentTarget.removeEventListener(EVENT, arguments.callee);
         self.cake();
       }, false);
+      // $text[0].addEventListener(EVENT, function (e) {
+      //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
+      //   self.cake();
+      // }, false);
     },
 
     cake: function () {
@@ -321,8 +322,11 @@ $(function () {
       $cake.html($textarea.text());
       $velas = $('.j_velas', $cake);
       setTimeout(function () {
+        $cake.css('opacity', 1);
+      }, 500);
+      setTimeout(function () {
         $title.addClass(cls);
-      }, 1500);
+      }, 4500);
       // $velas[0].addEventListener(EVENT, function (e) {
       //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
       //

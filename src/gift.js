@@ -260,7 +260,8 @@ $(function () {
         updateFn;
 
       updateFn = utils.count(
-        parseInt(+new Date('2015-05-27 01:00:00') / 1000, 10),
+        // parseInt(+new Date('2015-05-27 01:00:00') / 1000, 10),
+        1432659600,
         parseInt(+new Date() / 1000, 10),
         function (p) {
           var time = '';

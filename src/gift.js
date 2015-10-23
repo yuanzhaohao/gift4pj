@@ -326,7 +326,7 @@ $(function () {
       }, 500);
       setTimeout(function () {
         $title.addClass(cls);
-      }, 4500);
+      }, 3500);
       // $velas[0].addEventListener(EVENT, function (e) {
       //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
       //

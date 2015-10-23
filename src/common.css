@@ -89,7 +89,3 @@ body {
   font-size: 12px;
   font-weight: 300;
 }
-@font-face {
-	font-family: 'digit';
-	src: url('./digital.ttf') format('truetype');
-}

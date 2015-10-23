@@ -23,20 +23,10 @@ body {
   width: 100%;
   height: 100%;
 }
-.gift > .text {
+.gift canvas {
   position: absolute;
-  bottom: 1.06666667rem;
-  right: 1.28rem;
-}
-.gift .words {
-  height: 0.85333333rem;
-  line-height: 0.85333333rem;
-  font-size: 0.68266667rem;
-}
-.gift .signature {
-  line-height: 16px;
-  font-style: italic;
-  text-align: right;
+  top: 0;
+  left: 0;
 }
 .gift > .avatar {
   position: absolute;
@@ -59,6 +49,63 @@ body {
   background-image: url('pic.jpg');
   background-size: cover;
   border-radius: 100%;
+}
+.time {
+  position: absolute;
+  top: 4.69333333rem;
+  width: 100%;
+  padding: 0 60px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.time > .info {
+  line-height: 20px;
+  font-size: 18px;
+  opacity: 0;
+}
+.time > .count {
+  width: 100%;
+  height: 30px;
+  margin-top: 3px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 14px;
+  line-height: 30px;
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.time > .count > i {
+  display: inline-block;
+  margin-right: 2px;
+  margin-left: 2px;
+  font-family: 'digit';
+  font-size: 20px;
+}
+.time > .text {
+  width: 100%;
+  margin-top: 15px;
+  padding-right: 35px;
+  text-align: right;
+  opacity: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.time .words {
+  width: 100%;
+  height: 18px;
+  line-height: 18px;
+  font-size: 14px;
+  overflow: hidden;
+}
+.time .signature {
+  width: 100%;
+  height: 16px;
+  padding-right: 5px;
+  line-height: 16px;
+  font-style: italic;
+  overflow: hidden;
 }
 .cake {
   position: relative;
@@ -136,11 +183,19 @@ body {
   -webkit-animation: fuego 0.2s 6.5s infinite;
   animation: fuego 0.2s 6.5s infinite;
 }
-.message {
+.title {
   height: 50px;
   text-align: center;
   font-size: 24px;
   line-height: 50px;
+}
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1500ms;
+  animation-duration: 1500ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 /* ============================================== Animation Fire
 */
@@ -188,5 +243,21 @@ body {
   to {
     -webkit-transform: translateY(0);
     transform: translateY(0);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

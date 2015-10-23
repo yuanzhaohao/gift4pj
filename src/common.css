@@ -72,7 +72,7 @@ a {
 .clearfix:after {
   display: table;
   line-height: 0;
-  content: "";
+  content: '';
 }
 .clearfix:after {
   clear: both;
@@ -88,5 +88,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
   font-size: 12px;
   font-weight: 300;
-  color: #fff;
+}
+@font-face {
+	font-family: 'digit';
+	src: url('./digital.ttf') format('truetype');
 }

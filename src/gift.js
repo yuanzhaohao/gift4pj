@@ -188,6 +188,7 @@ $(function () {
     init: function () {
       var self = this;
 
+      self.EVENT = utils.hasProp(['animation']) ? 'animationend' : 'webkitAnimationEnd';
       self.heart();
       self.count();
     },
@@ -283,7 +284,6 @@ $(function () {
           $count.html(time);
         }
       );
-      console.log(updateFn);
       updateFn && win.addEventListener('scroll', utils.buffer(updateFn, 500), true);
     },
 
@@ -293,14 +293,15 @@ $(function () {
         $info = $('.j_info', $time),
         $count = $('.j_count', $time),
         $text = $('.j_text', $time),
-        fadeCls = 'fadeIn',
-        EVENT = utils.hasProp(['animation']) ? 'animationend' : 'webkitAnimationEnd';
+        cls = 'fadeIn anim1500ms',
+        cls1 = 'fadeIn anim1000ms',
+        EVENT = self.EVENT;
 
-      $info.addClass(fadeCls);
-      $count.addClass(fadeCls);
+      $info.addClass(cls);
+      $count.addClass(cls);
       $count[0].addEventListener(EVENT, function (e) {
         e.currentTarget.removeEventListener(EVENT, arguments.callee);
-        $text.addClass(fadeCls);
+        $text.addClass(cls1);
       }, false);
       $text[0].addEventListener(EVENT, function (e) {
         e.currentTarget.removeEventListener(EVENT, arguments.callee);
@@ -311,9 +312,21 @@ $(function () {
     cake: function () {
       var self = this,
         $cake = $('#J_cake'),
-        $textarea = $('#J_textarea');
+        $title = $('#J_title'),
+        $textarea = $('#J_textarea'),
+        cls = 'fadeIn anim1500ms',
+        EVENT = self.EVENT,
+        $velas;
 
       $cake.html($textarea.text());
+      $velas = $('.j_velas', $cake);
+      setTimeout(function () {
+        $title.addClass(cls);
+      }, 1500);
+      // $velas[0].addEventListener(EVENT, function (e) {
+      //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
+      //
+      // }, false);
     }
   }
   new Gift();

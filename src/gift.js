@@ -57,6 +57,122 @@ $(function () {
     self.hasProp = hasProp;
     self.supportProp = supportProp;
 
+    /**
+     * 倒计时功能函数
+     */
+    var getDaysInMonth =  function (month) {
+      var data = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      return data[month];
+    };
+    self.count = function (start, now, cb) {
+      var seconds = now - start,
+        minutes = parseInt(seconds / 60, 10),
+        hours = parseInt(seconds / (60 * 60), 10),
+        days = parseInt(seconds / (60 * 60 * 24), 10),
+        months = parseInt(seconds / (60 * 60 * 24 * 30), 10),
+        updateTimer = timer = null,
+        months;
+      if (seconds < 0) {
+        cb && cb();
+        return;
+      }
+      seconds = seconds - minutes * 60;
+      minutes = minutes - hours * 60;
+      hours = hours - days * 24;
+      days = days - months * 30;
+      // 直接使用本地时间进行比对
+      updateTimer = function () {
+        now = parseInt((+new Date) / 1000, 10);
+        seconds = now - start;
+        minutes = parseInt(seconds / 60, 10);
+        hours = parseInt(seconds / (60 * 60), 10);
+        seconds = seconds - minutes * 60;
+        minutes = minutes - hours * 60;
+      };
+      timer = setInterval(function () {
+        rAF(function () {
+          seconds++;
+          if (seconds >= 60) {
+            seconds -= 60;
+            minutes += 1;
+          }
+          if (minutes >= 60) {
+            minutes -= 60;
+            hours += 1;
+          }
+          if (hours >= 24) {
+            hours -= 24;
+            days += 1;
+          }
+          if (days >= 30) {
+            days -= 30;
+            months += 1;
+          }
+          cb && cb.call(null, {
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+            days: days,
+            months: months
+          });
+        });
+      }, 980);
+      // 返回更新时间的函数
+      return updateTimer;
+    };
+
+    self.buffer = function (fn, ms, context) {
+      var self = this;
+
+      ms = ms || 150;
+      if (ms === -1) {
+        return function () {
+          fn.apply(context || null, arguments);
+        };
+      }
+      var bufferTimer = null;
+      function f () {
+        f.stop();
+        bufferTimer = self.later(fn, ms, 0, context || null, arguments);
+      }
+      f.stop = function () {
+        if (bufferTimer) {
+          bufferTimer.cancel();
+          bufferTimer = 0;
+        }
+      };
+      return f;
+    };
+
+    self.later = function (fn, when, periodic, context, data) {
+      if (!fn) {
+        return;
+      }
+      var d = Array.prototype.slice.call(data);
+      when = when || 0;
+      if (typeof fn === 'string') {
+        fn = context[fn];
+      }
+
+      var f = function () {
+          fn.apply(context, d);
+        },
+        r = (periodic) ? setInterval(f, when) : setTimeout(f, when);
+
+      return {
+        id: r,
+        interval: periodic,
+        cancel: function () {
+          if (this.interval) {
+            clearInterval(r);
+          }
+          else {
+            clearTimeout(r);
+          }
+        }
+      };
+    };
+
     return self;
   })(undefined);
 
@@ -73,6 +189,7 @@ $(function () {
       var self = this;
 
       self.heart();
+      self.count();
     },
 
     heart: function () {
@@ -133,6 +250,41 @@ $(function () {
       setInterval(function () {
         garden.render();
       }, Garden.options.growSpeed);
+    },
+
+    count: function () {
+      var self = this,
+        $time = $('#J_time'),
+        $count = $('.j_count', $time),
+        updateFn;
+
+      updateFn = utils.count(
+        parseInt(+new Date('2015-05-27 01:00:00') / 1000, 10),
+        parseInt(+new Date() / 1000, 10),
+        function (p) {
+          var time = '';
+
+          if (p.months < 10) {
+            p.months = '0' + p.months;
+          }
+          if (p.days < 10) {
+            p.days = '0' + p.days;
+          }
+          if (p.hours < 10) {
+            p.hours = '0' + p.hours;
+          }
+          if (p.minutes < 10) {
+            p.minutes = '0' + p.minutes;
+          }
+          if (p.seconds < 10) {
+            p.seconds = '0' + p.seconds;
+          }
+          time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
+          $count.html(time);
+        }
+      );
+      console.log(updateFn);
+      updateFn && win.addEventListener('scroll', utils.buffer(updateFn, 500), true);
     },
 
     time: function () {

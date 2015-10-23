@@ -39,8 +39,9 @@ $(function () {
       }, Garden.options.growSpeed);
       getHeartPoint = function (angle) {
       	var t = angle / Math.PI,
-          x = 10.6 * (16 * Math.pow(Math.sin(t), 3)),
-          y = - 10 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+          standard = window.innerWidth / 375,
+          x = standard * 10.6 * (16 * Math.pow(Math.sin(t), 3)),
+          y = - standard * 10 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
       	return [offsetX + x, offsetY + y];
       };
       heartAnim = function () {

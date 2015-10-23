@@ -29,11 +29,18 @@ gulp.task('less', function () {
     .pipe(code.lint())
     .pipe(gulp.dest('src'));
 });
+
 gulp.task('css', ['clean', 'less'], function () {
   return gulp.src(['src/**/*.css'])
     .pipe(code.lint())
     .pipe(code.minify())
     .pipe(gulp.dest('build'));
+});
+
+gulp.task('copy', ['clean'], function () {
+    return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.jpeg', 'src/**/*.gif', 'src/**/*.json',
+      'src/**/*.html', 'src/**/*.htm', 'src/**/*.ttf', 'src/**/*.eot', 'src/**/*.svg', 'src/**/*.less', 'src/**/*.xtpl'])
+        .pipe(gulp.dest('build'));
 });
 
 gulp.task('connect', function () {
@@ -47,7 +54,7 @@ gulp.task('open', function () {
   return gulp.src('./index.html').pipe(open('', { url: 'http://localhost:3000/'}));
 });
 
-gulp.task('default', ['clean', 'js', 'less', 'css']);
+gulp.task('default', ['clean', 'js', 'less', 'css', 'copy']);
 gulp.task('watch', function () {
   gulp.watch(['src/**/*.less'], ['less']);
 });

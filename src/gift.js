@@ -281,6 +281,7 @@ $(function () {
           if (p.seconds < 10) {
             p.seconds = '0' + p.seconds;
           }
+          // time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
           time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
           $count.html(time);
         }
@@ -305,10 +306,6 @@ $(function () {
         $text.addClass(cls1);
         self.cake();
       }, false);
-      // $text[0].addEventListener(EVENT, function (e) {
-      //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
-      //   self.cake();
-      // }, false);
     },
 
     cake: function () {
@@ -328,10 +325,6 @@ $(function () {
       setTimeout(function () {
         $title.addClass(cls);
       }, 3500);
-      // $velas[0].addEventListener(EVENT, function (e) {
-      //   e.currentTarget.removeEventListener(EVENT, arguments.callee);
-      //
-      // }, false);
     }
   }
   new Gift();

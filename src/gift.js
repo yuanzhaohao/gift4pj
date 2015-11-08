@@ -187,6 +187,7 @@ $(function () {
     init: function () {
       var self = this;
 
+      self.isFirstCake = true;
       self.EVENT = utils.hasProp(['animation']) ? 'animationend' : 'webkitAnimationEnd';
       self.heart();
       self.count();
@@ -320,18 +321,18 @@ $(function () {
         $cake = $('#J_cake'),
         $title = $('#J_title'),
         $textarea = $('#J_textarea'),
-        cls = 'fadeIn anim1500ms',
-        EVENT = self.EVENT,
-        $velas;
+        cls = 'fadeIn anim1500ms';
 
-      $cake.html($textarea.text());
-      $velas = $('.j_velas', $cake);
-      setTimeout(function () {
-        $cake.css('opacity', 1);
-      }, 500);
-      setTimeout(function () {
-        $title.addClass(cls);
-      }, 3500);
+      if (self.isFirstCake) {
+        self.isFirstCake = false;
+        $cake.html($textarea.text());
+        setTimeout(function () {
+          $cake.css('opacity', 1);
+        }, 500);
+        setTimeout(function () {
+          $title.addClass(cls);
+        }, 3500);
+      }
     }
   }
   new Gift();

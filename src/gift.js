@@ -69,7 +69,7 @@ $(function () {
         minutes = parseInt(seconds / 60, 10),
         hours = parseInt(seconds / (60 * 60), 10),
         days = parseInt(seconds / (60 * 60 * 24), 10),
-        months = parseInt(seconds / (60 * 60 * 24 * 30), 10),
+        // months = parseInt(seconds / (60 * 60 * 24 * 30), 10),
         updateTimer = timer = null,
         months;
       if (seconds < 0) {
@@ -79,7 +79,7 @@ $(function () {
       seconds = seconds - minutes * 60;
       minutes = minutes - hours * 60;
       hours = hours - days * 24;
-      days = days - months * 30;
+      // days = days - months * 30;
       // 直接使用本地时间进行比对
       updateTimer = function () {
         now = parseInt((+new Date) / 1000, 10);
@@ -104,10 +104,10 @@ $(function () {
             hours -= 24;
             days += 1;
           }
-          if (days >= 30) {
-            days -= 30;
-            months += 1;
-          }
+          // if (days >= 30) {
+          //   days -= 30;
+          //   months += 1;
+          // }
           cb && cb.call(null, {
             hours: hours,
             minutes: minutes,
@@ -266,9 +266,9 @@ $(function () {
         function (p) {
           var time = '';
 
-          if (p.months < 10) {
-            p.months = '0' + p.months;
-          }
+          // if (p.months < 10) {
+          //   p.months = '0' + p.months;
+          // }
           if (p.days < 10) {
             p.days = '0' + p.days;
           }
@@ -282,7 +282,7 @@ $(function () {
             p.seconds = '0' + p.seconds;
           }
           // time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
-          time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
+          time += '<i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
           $count.html(time);
         }
       );

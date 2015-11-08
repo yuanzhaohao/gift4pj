@@ -195,14 +195,22 @@ $(function () {
     heart: function () {
       var self = this,
         $heart = $('#J_heart'),
-        // $canvas = $('#J_canvas'),
-        // canvasEl = $canvas[0],
-        getHeartPoint, heartAnim,
-        ctx, garden,
+        getHeartPoint, createHeart,
         offsetX, offsetY;
 
-      resize = function () {
-        var canvasEl = doc.createElement('canvas');
+      getHeartPoint = function (angle) {
+        var t = angle / Math.PI,
+          standard = window.innerWidth / 375,
+          x = standard * 10.6 * (16 * Math.pow(Math.sin(t), 3)),
+          y = - standard * 10 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+        return [offsetX + x, offsetY + y];
+      };
+      createHeart = utils.buffer(function () {
+        var canvasEl = doc.createElement('canvas'),
+          interval = 50,
+          angle = 10,
+          heart = [],
+          garden, ctx, animationTimer;
         $heart.html(canvasEl);
         offsetX = $heart.width() / 2;
         offsetY = $heart.height() / 2 - 25;
@@ -211,19 +219,7 @@ $(function () {
         ctx = canvasEl.getContext('2d');
         ctx.globalCompositeOperation = 'lighter';
         garden = new Garden(ctx, canvasEl);
-      }
-      getHeartPoint = function (angle) {
-        var t = angle / Math.PI,
-          standard = window.innerWidth / 375,
-          x = standard * 10.6 * (16 * Math.pow(Math.sin(t), 3)),
-          y = - standard * 10 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-        return [offsetX + x, offsetY + y];
-      };
-      heartAnim = function () {
-        var interval = 50,
-          angle = 10,
-          heart = [];
-        var animationTimer = setInterval(function () {
+        animationTimer = setInterval(function () {
           var bloom = getHeartPoint(angle),
             draw = true;
           for (var i = 0; i < heart.length; i++) {
@@ -246,12 +242,12 @@ $(function () {
             angle += 0.2;
           }
         }, interval);
-      };
-      resize();
-      heartAnim();
-      setInterval(function () {
-        garden.render();
-      }, Garden.options.growSpeed);
+        setInterval(function () {
+          garden.render();
+        }, Garden.options.growSpeed);
+      }, 250);
+      createHeart();
+      win.addEventListener('resize', createHeart, true);
     },
 
     count: function () {

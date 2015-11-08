@@ -289,15 +289,13 @@ $(function () {
       var self = this,
         $time = $('#J_time'),
         $info = $('.j_info', $time),
-        $count = $('.j_count', $time),
         $text = $('.j_text', $time),
         cls = 'fadeIn anim1500ms',
         cls1 = 'fadeIn anim1000ms',
         EVENT = self.EVENT;
 
       $info.addClass(cls);
-      $count.addClass(cls);
-      $count[0].addEventListener(EVENT, function (e) {
+      $info[0].addEventListener(EVENT, function (e) {
         e.currentTarget.removeEventListener(EVENT, arguments.callee);
         $text.addClass(cls1);
         self.cake();

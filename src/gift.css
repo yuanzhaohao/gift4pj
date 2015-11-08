@@ -63,11 +63,13 @@ body {
   box-sizing: border-box;
 }
 .time > .info {
-  line-height: 24px;
-  font-size: 18px;
   opacity: 0;
 }
-.time > .count {
+.time > .info > p {
+  line-height: 24px;
+  font-size: 18px;
+}
+.time .count {
   width: 100%;
   height: 30px;
   margin-top: 3px;
@@ -75,11 +77,10 @@ body {
   font-size: 14px;
   line-height: 30px;
   white-space: nowrap;
-  opacity: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.time > .count > i {
+.time .count > i {
   display: inline-block;
   margin-right: 1px;
   margin-left: 1px;

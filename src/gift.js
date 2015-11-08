@@ -195,13 +195,15 @@ $(function () {
     heart: function () {
       var self = this,
         $heart = $('#J_heart'),
-        $canvas = $('#J_canvas'),
-        canvasEl = $canvas[0],
+        // $canvas = $('#J_canvas'),
+        // canvasEl = $canvas[0],
         getHeartPoint, heartAnim,
         ctx, garden,
         offsetX, offsetY;
 
       resize = function () {
+        var canvasEl = doc.createElement('canvas');
+        $heart.html(canvasEl);
         offsetX = $heart.width() / 2;
         offsetY = $heart.height() / 2 - 25;
         canvasEl.width = $heart.width();

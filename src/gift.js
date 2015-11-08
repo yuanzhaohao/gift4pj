@@ -115,7 +115,7 @@ $(function () {
             months: months
           });
         });
-      }, 980);
+      }, 990);
       // 返回更新时间的函数
       return updateTimer;
     };
@@ -211,6 +211,7 @@ $(function () {
           angle = 10,
           heart = [],
           garden, ctx, animationTimer;
+        self.before();
         $heart.html(canvasEl);
         offsetX = $heart.width() / 2;
         offsetY = $heart.height() / 2 - 25;
@@ -248,6 +249,18 @@ $(function () {
       }, 250);
       createHeart();
       win.addEventListener('resize', createHeart, true);
+    },
+
+    before: function () {
+      var self = this,
+        $time = $('#J_time'),
+        $info = $('.j_info', $time),
+        $text = $('.j_text', $time),
+        cls = 'fadeIn anim1000ms anim1500ms';
+
+      $time.removeClass(cls);
+      $info.removeClass(cls);
+      $text.removeClass(cls);
     },
 
     count: function () {

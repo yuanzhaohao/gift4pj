@@ -69,9 +69,8 @@ $(function () {
         minutes = parseInt(seconds / 60, 10),
         hours = parseInt(seconds / (60 * 60), 10),
         days = parseInt(seconds / (60 * 60 * 24), 10),
-        // months = parseInt(seconds / (60 * 60 * 24 * 30), 10),
-        updateTimer = timer = null,
-        months;
+        months = parseInt(seconds / (60 * 60 * 24 * 30), 10),
+        updateTimer = timer = null;
       if (seconds < 0) {
         cb && cb();
         return;
@@ -79,7 +78,7 @@ $(function () {
       seconds = seconds - minutes * 60;
       minutes = minutes - hours * 60;
       hours = hours - days * 24;
-      // days = days - months * 30;
+      days = days - months * 30;
       // 直接使用本地时间进行比对
       updateTimer = function () {
         now = parseInt((+new Date) / 1000, 10);
@@ -104,10 +103,10 @@ $(function () {
             hours -= 24;
             days += 1;
           }
-          // if (days >= 30) {
-          //   days -= 30;
-          //   months += 1;
-          // }
+          if (days >= 30) {
+            days -= 30;
+            months += 1;
+          }
           cb && cb.call(null, {
             hours: hours,
             minutes: minutes,
@@ -260,15 +259,14 @@ $(function () {
         updateFn;
 
       updateFn = utils.count(
-        // parseInt(+new Date('2015-05-27 01:00:00') / 1000, 10),
         1432659600,
         parseInt(+new Date() / 1000, 10),
         function (p) {
           var time = '';
 
-          // if (p.months < 10) {
-          //   p.months = '0' + p.months;
-          // }
+          if (p.months < 10) {
+            p.months = '0' + p.months;
+          }
           if (p.days < 10) {
             p.days = '0' + p.days;
           }
@@ -281,8 +279,8 @@ $(function () {
           if (p.seconds < 10) {
             p.seconds = '0' + p.seconds;
           }
-          // time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
-          time += '<i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
+          time += '<i>' + p.months + '</i>mon <i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
+          // time += '<i>' + p.days + '</i>day <i>' + p.hours +'</i>hr <i>'+ p.minutes +'</i>min <i>'+ p.seconds +'</i>sec';
           $count.html(time);
         }
       );
